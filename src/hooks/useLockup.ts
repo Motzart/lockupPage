@@ -17,7 +17,6 @@ export const useLockup = () => {
   useEffect(() => {
     getLockupsPaged()
       .then((data: any) => {
-        console.log('-------', data)
         return setLockupPage(data);
       })
       .catch(e => console.log(e));

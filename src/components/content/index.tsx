@@ -4,7 +4,6 @@ import { separation, toPrecision, toReadableNumber } from '~utils/numbers';
 
 export const Content = () => {
   const lookups = useLockup();
-  console.log('lookups', lookups);
 
   return (
     <div className="container pt-1">
