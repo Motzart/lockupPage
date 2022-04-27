@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { appStore, onAppMount } from '~state/app';
 import { NavBar } from '~components/navBar';
 import { Content } from '~components/content';
+import { useLockup } from '~hooks/useLockup';
 
 function App() {
   const { dispatch } = useContext(appStore);
@@ -12,10 +13,12 @@ function App() {
 
   useEffect(onMount, []);
 
+  const lookups = useLockup();
+
   return (
     <>
       <NavBar/>
-      <Content />
+      {lookups && <Content lookups={lookups}/>}
     </>
   );
 }
