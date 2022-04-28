@@ -1,0 +1,38 @@
+.ascending {
+  border-bottom: 7px solid #ffd434;
+  position: relative;
+}
+
+.ascending::after {
+  border: medium solid transparent;
+  content: '';
+  top: 36%;
+  left: 85%;
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-color: #463372 rgba(255, 212, 52, 0) rgba(255, 212, 52, 0);
+  border-width: 8px;
+  margin-left: -25px;
+  transform: rotate(540deg);
+  transition: transform 0.5s;
+}
+
+.descending {
+  border-bottom: 7px solid #ff7434;
+  position: relative;
+}
+
+.descending::after {
+  border: medium solid transparent;
+  content: '';
+  top: 36%;
+  left: 85%;
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-color: #463372 rgba(255, 212, 52, 0) rgba(255, 212, 52, 0);
+  border-width: 8px;
+  margin-left: -25px;
+  transition: transform 0.5s;
+}
