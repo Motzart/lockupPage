@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 
 type SortConfig = {
-  key: string,
-  direction: string | undefined
-} | null
+  key: string;
+  direction: string | undefined;
+} | null;
 
 export const useSortableData = (items: any[], config: SortConfig = null) => {
   const [sortConfig, setSortConfig] = useState(config);
@@ -26,11 +26,15 @@ export const useSortableData = (items: any[], config: SortConfig = null) => {
 
   const requestSort = (key: string) => {
     let direction = 'ascending';
-    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === 'ascending'
+    ) {
       direction = 'descending';
     }
     setSortConfig({ key, direction });
-  }
+  };
 
   return { items: sortedItems, requestSort, sortConfig };
-}
+};

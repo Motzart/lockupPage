@@ -17,8 +17,8 @@ function App() {
 
   return (
     <>
-      <NavBar/>
-      {lookups && <Content lookups={lookups}/>}
+      <NavBar />
+      {lookups && <Content lookups={lookups} />}
     </>
   );
 }

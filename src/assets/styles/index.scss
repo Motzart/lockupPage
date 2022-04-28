@@ -3,3 +3,20 @@ body {
   font-weight: normal;
   line-height: normal;
 }
+
+.ascending {
+  color: aqua;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #14161c27;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.233);
+}
+
+tbody tr:hover {
+  transition: 0.5s ease-in-out;
+  background-color: #aff5b8fd;
+}
