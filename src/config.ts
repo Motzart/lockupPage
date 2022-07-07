@@ -10,6 +10,7 @@ export default function getConfig(env: string = defaultEnv) {
         helperUrl: 'https://helper.mainnet.near.org',
         explorerUrl: 'https://explorer.mainnet.near.org',
         LOCKUP_CONTRACT_ID: 'lockup.pembrock.near',
+        LOCKUP_LP_CONTRACT_ID: 'lockup-lp.pembrock.near',
         TOKEN_CONTRACT_ID: 'wrap.testnet',
         headers: {}
       }
@@ -21,6 +22,7 @@ export default function getConfig(env: string = defaultEnv) {
         helperUrl: 'https://helper.mainnet.near.org',
         explorerUrl: 'https://explorer.mainnet.near.org',
         LOCKUP_CONTRACT_ID: 'lockup.pembrock.near',
+        LOCKUP_LP_CONTRACT_ID: 'lockup-lp.pembrock.near',
         TOKEN_CONTRACT_ID: 'wrap.testnet',
         headers: {}
       }

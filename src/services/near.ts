@@ -8,6 +8,7 @@ import { currentStorageBalance } from '~services/account';
 const config = getConfig();
 
 const LOCKUP_CONTRACT_ID = config.LOCKUP_CONTRACT_ID;
+const LOCKUP_LP_CONTRACT_ID = config.LOCKUP_LP_CONTRACT_ID;
 const TOKEN_CONTRACT_ID = config.TOKEN_CONTRACT_ID;
 
 export const NEW_ACCOUNT_STORAGE_COST: string = '0.00125';
@@ -33,6 +34,10 @@ export const viewFunction = ({
   args,
 }: IViewFunctionOptions) => {
  return wallet.account().viewFunction(LOCKUP_CONTRACT_ID, methodName, args);
+};
+
+export const viewLPFunction = ({ methodName, args }: IViewFunctionOptions) => {
+  return wallet.account().viewFunction(LOCKUP_LP_CONTRACT_ID, methodName, args);
 };
 
 export interface Transaction {
@@ -64,12 +69,27 @@ export const getUserLockups = (): Promise<[]> => {
   });
 }
 
+export const getUserLpLockups = (): Promise<[]> => {
+  return viewLPFunction({
+    methodName: 'get_lockups_paged',
+    args: { from_index: 0, limit: 100 },
+  });
+};
+
 export const getLockupsPaged = (): Promise<[]> => {
   return viewFunction({
     methodName: 'get_lockups_paged',
     args: { from_index: 0, limit: 100 },
   });
 }
+
+export const getAllLockups = async () => {
+  let tasks: any[] = [];
+  tasks.push(getLockupsPaged());
+  tasks.push(getUserLpLockups());
+
+  return Promise.all(tasks);
+};
 
 export const claim = async () => {
   const transactions: Transaction[] = [];

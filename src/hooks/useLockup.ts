@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getLockupsPaged } from '~services/near';
+import { getAllLockups, getLockupsPaged } from '~services/near';
 
 export interface UserLockupsView {
   account_id: string,
@@ -15,9 +15,9 @@ export const useLockup = () => {
   const [userLockupPage, setLockupPage] = useState<UserLockupsView>();
 
   useEffect(() => {
-    getLockupsPaged()
+    getAllLockups()
       .then((data: any) => {
-        return setLockupPage(data);
+        return setLockupPage(data[0].concat(data[1]));
       })
       .catch(e => console.log(e));
   }, []);
