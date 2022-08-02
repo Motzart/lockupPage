@@ -2,8 +2,9 @@ import { utils } from 'near-api-js';
 import BN from 'bn.js';
 import { functionCall } from 'near-api-js/lib/transaction';
 import { wallet } from '~utils/near-utils';
-import getConfig from '../config'
+import getConfig from '../config';
 import { currentStorageBalance } from '~services/account';
+import { log } from 'console';
 
 const config = getConfig();
 
@@ -29,11 +30,8 @@ export interface IFunctionCallOptions extends IViewFunctionOptions {
   amount?: string;
 }
 
-export const viewFunction = ({
-  methodName,
-  args,
-}: IViewFunctionOptions) => {
- return wallet.account().viewFunction(LOCKUP_CONTRACT_ID, methodName, args);
+export const viewFunction = ({ methodName, args }: IViewFunctionOptions) => {
+  return wallet.account().viewFunction(LOCKUP_CONTRACT_ID, methodName, args);
 };
 
 export const viewLPFunction = ({ methodName, args }: IViewFunctionOptions) => {
@@ -67,7 +65,7 @@ export const getUserLockups = (): Promise<[]> => {
     methodName: 'get_account_lockups',
     args: { account_id: wallet.getAccountId() },
   });
-}
+};
 
 export const getUserLpLockups = (): Promise<[]> => {
   return viewLPFunction({
@@ -81,7 +79,7 @@ export const getLockupsPaged = (): Promise<[]> => {
     methodName: 'get_lockups_paged',
     args: { from_index: 0, limit: 100 },
   });
-}
+};
 
 export const getAllLockups = async () => {
   let tasks: any[] = [];
@@ -97,7 +95,6 @@ export const claim = async () => {
   const balance = await currentStorageBalance();
 
   if (!balance || balance.total === '0') {
-
     // claim
     transactions.unshift({
       receiverId: LOCKUP_CONTRACT_ID,
@@ -132,9 +129,9 @@ export const claim = async () => {
       methodName: 'claim',
       args: {},
       gas: getGas('100000000000000').toString(),
-    })
+    });
   }
-}
+};
 
 export const executeMultipleTransactions = async (
   transactions: Transaction[],

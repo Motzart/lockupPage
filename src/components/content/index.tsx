@@ -1,6 +1,7 @@
 import React from 'react';
 import { separation, toPrecision, toReadableNumber } from '~utils/numbers';
 import { useSortableData } from '~hooks/useSortableData';
+
 import styles from './content.module.scss';
 
 type Props = {
@@ -21,8 +22,10 @@ export const Content = (props: Props) => {
 
   const balance = (data: any, field: any): any => {
     let total: number = 0;
+
     data.map((item: any) => {
       const number = toPrecision(toReadableNumber(18, item[1][field]), 0);
+
       total += Number(number);
     });
 
@@ -60,7 +63,25 @@ const showData = (
             </th>
             <th
               scope="col"
-              onClick={() => requestSort('claimed_balance')}
+              onClick={() => {
+                requestSort('current_balance');
+              }}
+              className={
+                getClassNamesFor('current_balance') === undefined
+                  ? styles.scending
+                  : getClassNamesFor('current_balance') === 'ascending'
+                  ? styles.ascending
+                  : styles.descending
+              }
+              style={{ cursor: 'pointer', backgroundColor: 'light' }}
+            >
+              Current Balance
+            </th>
+            <th
+              scope="col"
+              onClick={() => {
+                requestSort('claimed_balance');
+              }}
               className={
                 getClassNamesFor('claimed_balance') === undefined
                   ? styles.scending
@@ -74,7 +95,9 @@ const showData = (
             </th>
             <th
               scope="col"
-              onClick={() => requestSort('total_balance')}
+              onClick={() => {
+                requestSort('total_balance');
+              }}
               className={
                 getClassNamesFor('total_balance') === undefined
                   ? styles.scending
@@ -88,7 +111,9 @@ const showData = (
             </th>
             <th
               scope="col"
-              onClick={() => requestSort('unclaimed_balance')}
+              onClick={() => {
+                requestSort('unclaimed_balance');
+              }}
               className={
                 getClassNamesFor('unclaimed_balance') === undefined
                   ? styles.scending
@@ -106,6 +131,7 @@ const showData = (
           <tr>
             <th scope="col"></th>
             <th scope="col">Total</th>
+            <th scope="col">{separation(balance(data, 'current_balance'))}</th>
             <th scope="col">{separation(balance(data, 'claimed_balance'))}</th>
             <th scope="col">{separation(balance(data, 'total_balance'))}</th>
             <th scope="col">
@@ -117,6 +143,14 @@ const showData = (
               <tr key={item[1].account_id + index}>
                 <th scope="row">{index + 1}</th>
                 <td>{item[1].account_id}</td>
+                <td>
+                  {separation(
+                    toPrecision(
+                      toReadableNumber(18, item[1].current_balance),
+                      0
+                    )
+                  )}
+                </td>
                 <td>
                   {separation(
                     toPrecision(
