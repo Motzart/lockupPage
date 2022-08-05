@@ -24,7 +24,7 @@ export const Content = (props: Props) => {
     let total: number = 0;
 
     data.map((item: any) => {
-      const number = toPrecision(toReadableNumber(18, item[1][field]), 0);
+      const number = toPrecision(toReadableNumber(18, item[field]), 0);
 
       total += Number(number);
     });
@@ -140,13 +140,13 @@ const showData = (
           </tr>
           {data.map((item, index) => {
             return (
-              <tr key={item[1].account_id + index}>
+              <tr key={item.account_id + index}>
                 <th scope="row">{index + 1}</th>
-                <td>{item[1].account_id}</td>
+                <td>{item.account_id}</td>
                 <td>
                   {separation(
                     toPrecision(
-                      toReadableNumber(18, item[1].current_balance),
+                      toReadableNumber(18, item.current_balance),
                       0
                     )
                   )}
@@ -154,20 +154,20 @@ const showData = (
                 <td>
                   {separation(
                     toPrecision(
-                      toReadableNumber(18, item[1].claimed_balance),
+                      toReadableNumber(18, item.claimed_balance),
                       0
                     )
                   )}
                 </td>
                 <td>
                   {separation(
-                    toPrecision(toReadableNumber(18, item[1].total_balance), 0)
+                    toPrecision(toReadableNumber(18, item.total_balance), 0)
                   )}
                 </td>
                 <td>
                   {separation(
                     toPrecision(
-                      toReadableNumber(18, item[1].unclaimed_balance),
+                      toReadableNumber(18, item.unclaimed_balance),
                       0
                     )
                   )}
