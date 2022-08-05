@@ -6,13 +6,6 @@ const config = getConfig();
 
 const TOKEN_CONTRACT_ID = config.TOKEN_CONTRACT_ID;
 
-export const ftViewFunction = ({
-  methodName,
-  args
-}: IFunctionCallOptions ) => {
-  return wallet.account().viewFunction(TOKEN_CONTRACT_ID, methodName, args);
-};
-
 export const ftFunctionCall = ({
   methodName,
   args,
@@ -30,9 +23,16 @@ export const ftFunctionCall = ({
     );
 };
 
-export const ftGetBalance = () => {
-  return ftViewFunction({
+export const ftViewFunction = (
+  tokenId: string,
+  { methodName, args }: PembViewFunctionOptions
+) => {
+  return wallet.account().viewFunction(tokenId, methodName, args);
+};
+
+export const ftGetBalance = (account_id) => {
+  return ftViewFunction(TOKEN_CONTRACT_ID, {
     methodName: 'ft_balance_of',
-    args: { account_id: wallet.getAccountId() },
+    args: { account_id: account_id },
   }).catch(() => '0');
 };

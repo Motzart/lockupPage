@@ -12,4 +12,3 @@ export const currentStorageBalance = (): Promise<AccountStorageView> => {
     args: { account_id: wallet.getAccountId() },
   });
 };
-

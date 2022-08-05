@@ -10,12 +10,13 @@ export const useSortableData = (items: any[], config: SortConfig = null) => {
 
   const sortedItems = useMemo(() => {
     let sortableItems = [...items];
+
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {
-        if (+a[1][sortConfig.key] < +b[1][sortConfig.key]) {
+        if (+a[sortConfig.key] < +b[sortConfig.key]) {
           return sortConfig.direction === 'ascending' ? -1 : 1;
         }
-        if (+a[1][sortConfig.key] > +b[1][sortConfig.key]) {
+        if (+a[sortConfig.key] > +b[sortConfig.key]) {
           return sortConfig.direction === 'ascending' ? 1 : -1;
         }
         return 0;
